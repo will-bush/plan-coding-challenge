@@ -15,8 +15,9 @@ class SearchForm extends React.Component {
     }
   
     handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
-      event.preventDefault();
+        event.preventDefault();
+        alert('The user searched for: ' + this.state.value);
+        this.props.search(this.state.value)
     }
   
     render() {
