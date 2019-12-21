@@ -1,0 +1,30 @@
+.home {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 10vw 30vw 10vw;
+    grid-gap: 0.5em;
+  }
+  
+  header,
+  footer {
+    grid-column: 1 / span 2;
+  }
+  
+  body {
+    margin: 0 auto;
+    max-width: 56em;
+    padding: 1em 0;
+  }
+  
+  header,
+  main,
+  aside,
+  footer {
+    background: #000000;
+    border-radius: 10px;
+    color: #ffffff;
+    display: flex;
+    padding: 20px;
+  /*   align-items: center;
+    justify-content: center; */
+  }
