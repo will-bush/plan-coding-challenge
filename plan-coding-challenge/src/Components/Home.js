@@ -1,5 +1,7 @@
 import React from 'react';
 import './Home.css'
+import logo from '../logo.svg'
+import SearchForm from './SearchForm'
 
 class Home extends React.Component {
 
@@ -8,7 +10,8 @@ class Home extends React.Component {
         return (
             <div className="home">
                 <header>
-                    Plan.com MovieFinder
+                    <img className="logo" src={logo} alt="plan.com logo"/>
+                    <SearchForm/>
                 </header>
                 <aside>
                     List

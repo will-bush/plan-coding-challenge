@@ -1,0 +1,18 @@
+.searchForm {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 30px;
+}
+
+.searchForm input{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+#submit {
+    width: 100px;
+    background-color: blue;
+    height: 30px;
+}
