@@ -2,52 +2,63 @@ import React from 'react';
 import './Home.css'
 import logo from '../logo.svg'
 import SearchForm from './SearchForm'
-import ResultsList from './ResultsList'
-import API from '../API'
+// import ResultsList from './ResultsList'
+// import API from '../API'
+// import useFetch from './useFetch'
+import Search from './Search';
+import ShowSelected from './ShowSelected';
 
 class Home extends React.Component {
 
     state = {
-        search_results: null,
-        selected_result: null
+        // search_results: null,
+        selected_result: null,
+        search_query: ""
     }
 
+    componentDidMount() {
+        if (localStorage.getItem('selected_result')) {
+            let selected = localStorage.getItem('selected_result')
+            this.setState({
+                selected_result: JSON.parse(selected)
+            })
+        }
+        if (localStorage.getItem('search_query')) {
+            let current_query = localStorage.getItem('search_query')
+            this.setState({
+                search_query: JSON.parse(current_query)
+            })
+        }
+    }
 
-    // WRITE A CUSTOM USEFETCH HOOK THAT MAKES THE OMDB API CALL, USING THE SEARCH QUERY PASSED IN BY SearchForm
-    // useFetch = (searchQuery, options) => {
-    //     const [response, setResponse] = React.useState(null);
-    //     const [error, setError] = React.useState(null);
-      
-    //     React.useEffect(() => {
-    //       const FetchData = async () => {
-    //         try {
-    //           const res = await fetch(SearchURL+searchQuery, options);
-    //           const json = await res.json();
-    //           setResponse(json);
-    //         } catch (error) {
-    //           setError(error);
-    //         }
-    //       };
-    //       FetchData();
-    //     }, []);
-    //     return { response, error };
-    //   };
-
-    // WRITE A FUNCTION THAT SETS THE SELECTED RESULT IN THE DETAIL VIEW
+    // A FUNCTION THAT SETS THE SELECTED RESULT IN THE DETAIL VIEW
     viewResult = (result) => {
         this.setState({
             selected_result: result
         })
+        localStorage.setItem('selected_result', JSON.stringify(result));
+    }
+    // A FUNCTION THAT SETS THE RETURNED RESULTS IN THE LIST VIEW
+    // addResultsToState = (results) => {
+    //     this.setState({
+    //         search_results: results
+    //     })
+    // }
+
+    // A FUNCTION THAT SAVES THE SEARCH INPUT TERM IN STATE
+    setSearchQuery = (query) => {
+        this.setState({
+            search_query: query
+        })
+        localStorage.setItem('search_query', JSON.stringify(query));
     }
 
-    search = (query) => {
-        API.search(query)
-        .then(resp => this.setState({
-            search_results: resp
-        }))
+    clearSelectedResult = () => {
+        localStorage.setItem('selected_result', null);
+        this.setState({
+            selected_result: null
+        })
     }
-
-    // X
 
     render() {
 
@@ -55,17 +66,18 @@ class Home extends React.Component {
             <div className="home">
                 <header>
                     <img className="logo" src={logo} alt="plan.com logo"/>
-                    <SearchForm search={this.search}/>
+                    <SearchForm search={this.search} setSearchQuery={this.setSearchQuery} clearSelectedResult={this.clearSelectedResult}/>
                 </header>
                 <aside>
-                   {this.state.search_results && this.state.search_results.Search.length > 0? <ResultsList results={this.state.search_results}/> : <p>We don't have any search results!!</p>}
+                    {this.state.search_query !== "" ? <Search query={this.state.search_query} viewResult={this.viewResult}/> : null}
                 </aside>
                 <main>
-                    {this.state.selected_result ? <p>THIS IS THE SELECTED RESULT</p> : <p>NO RESULT HAS BEEN SELECTED!!</p>}
+                    {this.state.selected_result ? <ShowSelected movie={this.state.selected_result} ></ShowSelected> : <p>NO RESULT HAS BEEN SELECTED!!</p>}
                 </main>
                 <footer>
                     Footer
                 </footer>
+                
             </div>
         )
     }

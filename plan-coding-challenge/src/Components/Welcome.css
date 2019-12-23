@@ -1,0 +1,30 @@
+.welcome {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-gap: 0.5em;
+    /* min-height: 100%; */
+  }
+  
+  .welcome body {
+    margin: 0 auto;
+    /* max-width: 56em; */
+    max-width: 90%;
+    /* padding: 1em 0; */
+  }
+  
+  .welcome header,
+  main,
+  footer {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .welcome h1 {
+    text-align: center;
+    color: aquamarine;
+  }
+
+  .welcome p {
+      margin: 20px;
+  }
