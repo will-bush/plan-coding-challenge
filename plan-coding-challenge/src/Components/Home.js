@@ -2,16 +2,12 @@ import React from 'react';
 import './Home.css'
 import logo from '../logo.svg'
 import SearchForm from './SearchForm'
-// import ResultsList from './ResultsList'
-// import API from '../API'
-// import useFetch from './useFetch'
 import Search from './Search';
 import ShowSelected from './ShowSelected';
 
 class Home extends React.Component {
 
     state = {
-        // search_results: null,
         selected_result: null,
         search_query: ""
     }
@@ -38,12 +34,6 @@ class Home extends React.Component {
         })
         localStorage.setItem('selected_result', JSON.stringify(result));
     }
-    // A FUNCTION THAT SETS THE RETURNED RESULTS IN THE LIST VIEW
-    // addResultsToState = (results) => {
-    //     this.setState({
-    //         search_results: results
-    //     })
-    // }
 
     // A FUNCTION THAT SAVES THE SEARCH INPUT TERM IN STATE
     setSearchQuery = (query) => {
@@ -72,12 +62,11 @@ class Home extends React.Component {
                     {this.state.search_query !== "" ? <Search query={this.state.search_query} viewResult={this.viewResult}/> : null}
                 </aside>
                 <main>
-                    {this.state.selected_result ? <ShowSelected movie={this.state.selected_result} ></ShowSelected> : <p>NO RESULT HAS BEEN SELECTED!!</p>}
+                    {this.state.selected_result ? <ShowSelected movie={this.state.selected_result} ></ShowSelected> : <p>Please perform a search and select a movie from the results list.</p>}
                 </main>
                 <footer>
-                    Footer
+                <button id="about" onClick={() => this.props.history.push('/about')}>ABOUT</button>
                 </footer>
-                
             </div>
         )
     }

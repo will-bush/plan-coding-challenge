@@ -16,7 +16,6 @@ class SearchForm extends React.Component {
   
     handleSubmit(event) {
         event.preventDefault();
-        // alert('The user searched for: ' + this.state.value);
         this.props.setSearchQuery(this.state.value);
         this.props.clearSelectedResult();
     }
@@ -25,7 +24,7 @@ class SearchForm extends React.Component {
       return (
         <form onSubmit={this.handleSubmit} className="searchForm">
           <label>
-            Search: 
+            <strong>Search: </strong>
             <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Please enter a movie title"/>
           </label>
           <input type="submit" value="Submit" id="submit"/>
